@@ -234,3 +234,20 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+@media screen and (min-width: 750px) and (max-width: 1199px) {
+  .sheia-hero__heading {
+    font-size: 30px;
+    margin: 0 0 15px;
+  }
+  .sheia-hero__description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+  .sheia-hero__button {
+    min-height: 36px;
+    padding: 8px 15px;
+    min-width: 190px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,691 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .epg-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ section.settings.grid_gap }}px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 749px) {
+    #shopify-section-{{ section.id }} .epg-grid--cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    #shopify-section-{{ section.id }} .epg-grid--cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Card Wrapper */
+  #shopify-section-{{ section.id }} .epg-card {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    background-color: #f4efe9;
+  }
+
+  /* Relative Image Wrapper Div */
+  #shopify-section-{{ section.id }} .epg-media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  {%- if section.settings.card_height_mode_mobile == 'fixed' -%}
+    #shopify-section-{{ section.id }} .epg-media {
+      height: {{ section.settings.card_height_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .epg-bg-image {
+      height: 100%;
+      object-fit: cover;
+    }
+  {%- else -%}
+    #shopify-section-{{ section.id }} .epg-media {
+      height: auto;
+    }
+    #shopify-section-{{ section.id }} .epg-bg-image {
+      height: auto;
+    }
+  {%- endif -%}
+
+  @media screen and (min-width: 768px) {
+    {%- if section.settings.card_height_mode_desktop == 'fixed' -%}
+      #shopify-section-{{ section.id }} .epg-media {
+        height: {{ section.settings.card_height_desktop }}px;
+      }
+      #shopify-section-{{ section.id }} .epg-bg-image {
+        height: 100%;
+        object-fit: cover;
+      }
+    {%- else -%}
+      #shopify-section-{{ section.id }} .epg-media {
+        height: auto;
+      }
+      #shopify-section-{{ section.id }} .epg-bg-image {
+        height: auto;
+      }
+    {%- endif -%}
+  }
+
+  #shopify-section-{{ section.id }} .epg-bg-image {
+    display: block;
+    width: 100%;
+    object-position: center;
+    transition: transform 0.6s ease;
+  }
+
+  #shopify-section-{{ section.id }} .epg-card:hover .epg-bg-image {
+    transform: scale(1.03);
+  }
+
+  /* Overlay Content Div */
+  #shopify-section-{{ section.id }} .epg-overlay {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /* Desktop Overlay Positions (Section-level) */
+  @media screen and (min-width: 991px) {
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-left,
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-center,
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--epg-media-height, 100%);
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-left {
+      justify-content: flex-start;
+    }
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-center {
+      justify-content: center;
+    }
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-right {
+      justify-content: flex-end;
+    }
+
+    #shopify-section-{{ section.id }} .epg-overlay--desktop-under {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      height: auto;
+      justify-content: center;
+      pointer-events: auto;
+    }
+  }
+
+  /* Ornate Badge Container (% width, auto height) */
+  #shopify-section-{{ section.id }} .epg-badge {
+    position: relative;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    min-width: 120px;
+    height: auto;
+    min-height: 120px;
+    padding: 24px 12%;
+    box-sizing: border-box;
+  }
+
+  /* Custom Maroon & Gold Frame Image */
+  #shopify-section-{{ section.id }} .epg-badge-frame {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Fallback CSS styling if no frame image is uploaded */
+  #shopify-section-{{ section.id }} .epg-badge--fallback {
+    background-color: {{ section.settings.fallback_bg_color }};
+    border: 2px solid {{ section.settings.fallback_border_color }};
+    border-radius: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Text & Button inside the Badge */
+  #shopify-section-{{ section.id }} .epg-badge-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .epg-heading {
+    margin: 0;
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    line-height: 1.25;
+    background: linear-gradient( 110deg, #754014 0%, #b77a2c 13%, #f4d17b 31%, #fff0b5 45%, #d69a3d 63%, #8a4e1b 83%, #e8bc65 100% );;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media screen and (min-width: 1401px) {
+    #shopify-section-{{ section.id }} .epg-heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+    #shopify-section-{{ section.id }} .epg-grid--cols-3 .epg-heading {
+      font-size: {{ section.settings.heading_size_desktop | times: 0.85 | round: 0 }}px;
+    }
+  }
+
+  /* Metallic Gold Button */
+  #shopify-section-{{ section.id }} .epg-btn {
+    --sheiaa-gold: linear-gradient( 110deg, #754014 0%, #b77a2c 13%, #f4d17b 31%, #fff0b5 45%, #d69a3d 63%, #8a4e1b 83%, #e8bc65 100% );
+    color: {{ section.settings.btn_text_color }};
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    padding: 10px 25px;
+    background: var(--sheiaa-gold);
+    font-size: 18px;
+    letter-spacing: 0;
+    text-decoration: none;
+    border: none;
+    border-radius: 0;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .epg-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  @media screen and (max-width: 480px) {
+    #shopify-section-{{ section.id }} .epg-heading {
+      max-width: 130px;
+    }
+  }
+
+  /* Mobile Overlay Positions (Section-level) */
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-left,
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-center,
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--epg-media-height, 100%);
+      align-items: center;
+      padding: 15px;
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-left {
+      justify-content: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-center {
+      justify-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-right {
+      justify-content: flex-end;
+    }
+
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-under {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      height: auto;
+      justify-content: center;
+      padding: 15px;
+      pointer-events: auto;
+      background-color: #7c0d23;
+    }
+    #shopify-section-{{ section.id }} .epg-overlay--mobile-under img {
+        display: none;
+    }
+    #shopify-section-{{ section.id }} .epg-badge {
+      padding: 10px 15%;
+    }
+
+    #shopify-section-{{ section.id }} .epg-btn {
+      min-width: 100px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    #shopify-section-{{ section.id }} .epg--under-mobile .epg-overlay {
+        position: relative !important;
+        background-color: #7d0d23;
+        justify-content: center !important;
+    }
+  }
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} .epg--under-mobile .epg-badge {
+      padding: 10px 15%;
+      width: 100%;
+    }
+    #shopify-section-{{ section.id }} .epg--under-mobile .epg-badge .epg-badge-frame{
+        padding: 15px ;
+    }
+    #shopify-section-{{ section.id }} .epg-heading {
+      font-size: 18px;
+    }
+    #shopify-section-{{ section.id }} .epg-grid--cols-3 .epg-heading {
+      font-size: 14px;
+    }
+    #shopify-section-{{ section.id }} .epg-btn {
+      min-width: 100px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    #shopify-section-{{ section.id }} .epg--under-mobile .epg-badge {
+      padding: 10px 15%;
+      width: auto;
+      min-width: 230px;
+    }
+  }
+@media screen and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} .epg-overlay {
+      padding: 10px;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    #shopify-section-{{ section.id }} .epg-heading {
+      font-size: {{ section.settings.heading_size_desktop | times: 0.75 | round: 0 }}px;
+    }
+    #shopify-section-{{ section.id }} .epg-grid--cols-3 .epg-heading {
+      font-size: {{ section.settings.heading_size_desktop | times: 0.7 | round: 0 }}px;
+      min-width: 160px;
+    }
+    #shopify-section-{{ section.id }} .epg-btn {
+        font-size: 14px;
+        min-width: 100px;
+    }
+}
+@media screen and (min-width: 416px) and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .epg-grid--cols-3 .epg-heading {
+        font-size: 21px;
+        max-width: unset;
+        min-width: 210px;
+    }
+}
+{%- endstyle -%}
+<div id="shopify-section-{{ section.id }}">
+    <div class="epg-grid epg-grid--cols-{{ section.settings.columns }} {% if section.settings.overlay_under_desktop %} epg--under-desktop{% endif %}{% if section.settings.overlay_under_mobile %} epg--under-mobile{% endif %}" id="epg-grid-{{ section.id }}">
+    {%- for block in section.blocks -%}
+        <div class="epg-card" {{ block.shopify_attributes }}>
+
+        {%- comment -%} Relative Image Wrapper {%- endcomment -%}
+        <div class="epg-media">
+            {%- if block.settings.bg_image != blank -%}
+            {{
+                block.settings.bg_image
+                | image_url: width: 1600
+                | image_tag:
+                loading: 'lazy',
+                class: 'epg-bg-image',
+                widths: '400, 600, 800, 1000, 1400, 1600',
+                alt: block.settings.heading | escape
+            }}
+            {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'epg-bg-image' }}
+            {%- endif -%}
+        </div>
+
+        {%- comment -%} Overlay Content Div {%- endcomment -%}
+        <div class="epg-overlay epg-overlay--desktop-{{ block.settings.overlay_position_desktop }} epg-overlay--mobile-{{ block.settings.overlay_position_mobile }}">
+            {%- assign frame_image = block.settings.custom_frame_image | default: section.settings.default_frame_image -%}
+
+            <div class="epg-badge {% if frame_image == blank %}epg-badge--fallback{% endif %}">
+            {%- if frame_image != blank -%}
+                {{
+                frame_image
+                | image_url: width: 900
+                | image_tag:
+                    loading: 'lazy',
+                    class: 'epg-badge-frame',
+                    alt: ''
+                }}
+            {%- endif -%}
+
+            <div class="epg-badge-content">
+                {%- if block.settings.heading != blank -%}
+                <h3 class="epg-heading">{{ block.settings.heading | newline_to_br }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.button_label != blank -%}
+                <a
+                    {% if block.settings.button_link != blank %}
+                    href="{{ block.settings.button_link }}"
+                    {% else %}
+                    role="link" aria-disabled="true"
+                    {% endif %}
+                    class="epg-btn"
+                >
+                    {{ block.settings.button_label | escape }}
+                </a>
+                {%- endif -%}
+            </div>
+            </div>
+        </div>
+
+        </div>
+    {%- endfor -%}
+    </div>
+</div>
+<script>
+  (function() {
+    const sectionEl = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionEl) return;
+
+    function syncOverlayHeights() {
+      const cards = sectionEl.querySelectorAll('.epg-card');
+      cards.forEach((card) => {
+        const media = card.querySelector('.epg-media');
+        const overlay = card.querySelector('.epg-overlay');
+        if (media && overlay) {
+          overlay.style.setProperty('--epg-media-height', media.offsetHeight + 'px');
+        }
+      });
+    }
+
+    syncOverlayHeights();
+    window.addEventListener('resize', syncOverlayHeights);
+    window.addEventListener('load', syncOverlayHeights);
+
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(syncOverlayHeights);
+      sectionEl.querySelectorAll('.epg-media').forEach((media) => ro.observe(media));
+    }
+
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail.sectionId === '{{ section.id }}') {
+        syncOverlayHeights();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Ornate Promo Grid (2/3)",
+  "tag": "section",
+  "class": "section-ethnic-promo",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns per row (Desktop)",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 Columns"
+        },
+        {
+          "value": "3",
+          "label": "3 Columns"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_under_desktop",
+      "label": "Show content under image (Desktop)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_under_mobile",
+      "label": "Show content under image (Mobile)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Block Gap",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "card_height_mode_desktop",
+      "label": "Card Height Mode (Desktop)",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed (px)"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "card_height_desktop",
+      "min": 250,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed Card Height (Desktop)",
+      "default": 440
+    },
+    {
+      "type": "select",
+      "id": "card_height_mode_mobile",
+      "label": "Card Height Mode (Mobile)",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed (px)"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "min": 220,
+      "max": 650,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed Card Height (Mobile)",
+      "default": 380
+    },
+    {
+      "type": "header",
+      "content": "Maroon & Gold Frame Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "default_frame_image",
+      "label": "Default Maroon & Gold Frame (PNG/SVG)",
+      "info": "Upload the exported maroon scalloped frame with gold border."
+    },
+    {
+      "type": "range",
+      "id": "badge_width_percent",
+      "min": 20,
+      "max": 90,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay Frame Width (%)",
+      "default": 45
+    },
+    {
+      "type": "color",
+      "id": "fallback_bg_color",
+      "label": "Fallback Frame Fill Color",
+      "default": "#6e0d1d"
+    },
+    {
+      "type": "color",
+      "id": "fallback_border_color",
+      "label": "Fallback Frame Border Color",
+      "default": "#d4af37"
+    },
+    {
+      "type": "header",
+      "content": "Content & Button Settings"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 16,
+      "max": 38,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#2b1605"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promo_card",
+      "name": "Promo Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_frame_image",
+          "label": "Custom Frame Image (Optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Effortlessly Ethnic,\nBeautifully You"
+        },
+        {
+        "type": "select",
+        "id": "overlay_position_desktop",
+        "label": "Overlay Position (Desktop)",
+        "options": [
+            {
+            "value": "left",
+            "label": "Left"
+            },
+            {
+            "value": "center",
+            "label": "Center"
+            },
+            {
+            "value": "right",
+            "label": "Right"
+            },
+            {
+            "value": "under",
+            "label": "Under Image"
+            }
+        ],
+        "default": "right"
+        },
+        {
+        "type": "select",
+        "id": "overlay_position_mobile",
+        "label": "Overlay Position (Mobile)",
+        "options": [
+            {
+            "value": "left",
+            "label": "Left"
+            },
+            {
+            "value": "center",
+            "label": "Center"
+            },
+            {
+            "value": "right",
+            "label": "Right"
+            },
+            {
+            "value": "under",
+            "label": "Under Image"
+            }
+        ],
+        "default": "right"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ornate Promo Grid (2/3)",
+      "blocks": [
+        {
+          "type": "promo_card",
+          "settings": {
+            "heading": "Effortlessly Ethnic,\nBeautifully You",
+            "button_label": "Explore"
+          }
+        },
+        {
+          "type": "promo_card",
+          "settings": {
+            "heading": "A Timeless Twirl\nof Elegance",
+            "button_label": "Explore"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
