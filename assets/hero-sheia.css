@@ -1,0 +1,236 @@
+
+/* =========================================
+   SHEIAA HERO - GOLD GRADIENT
+========================================= */
+
+.sheia-hero {
+  --sheiaa-gold: linear-gradient(
+    110deg,
+    #754014 0%,
+    #b77a2c 13%,
+    #f4d17b 31%,
+    #fff0b5 45%,
+    #d69a3d 63%,
+    #8a4e1b 83%,
+    #e8bc65 100%
+  );
+
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   DESKTOP: TWO EQUAL COLUMNS
+========================================= */
+
+.sheia-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  width: 100%;
+}
+
+
+/* =========================================
+   LEFT: TEXT PANEL
+========================================= */
+
+.sheia-hero__panel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  min-width: 0;
+  padding: var(--panel-padding, 55px);
+
+  background-color: var(--panel-background-color, #791026);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sheia-hero__content {
+  width: 100%;
+  max-width: 558px;
+  text-align: var(--text-alignment, center);
+}
+
+
+/* =========================================
+   HEADING: GOLD GRADIENT
+========================================= */
+
+.sheia-hero__heading {
+  margin: 0 0 22px;
+
+  font-size: clamp(28px, 3.5vw, var(--heading-size, 48px));
+  font-size: 72px;
+  line-height: 1.2;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0;
+
+  background: var(--sheiaa-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+
+/* =========================================
+   DESCRIPTION: GOLD GRADIENT
+========================================= */
+
+.sheia-hero__description {
+  margin-bottom: 30px;
+
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 600;
+
+  background: var(--sheiaa-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.sheia-hero__description p {
+  margin: 0 0 12px;
+}
+
+.sheia-hero__description p:last-child {
+  margin-bottom: 0;
+}
+/* =========================================
+   CTA BUTTON: GOLD GRADIENT
+========================================= */
+
+.sheia-hero__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 15px;
+    min-width: 250px;
+    background: var(--sheiaa-gold);
+    color: #3d220e;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-decoration: none;
+    border: none;
+    border-radius: 0;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.sheia-hero__button span {
+  color: #3d220e;
+}
+
+.sheia-hero__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   RIGHT: IMAGE AREA
+========================================= */
+
+.sheia-hero__media {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sheia-hero__media picture {
+  display: block;
+  width: 100%;
+}
+
+.sheia-hero__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.sheia-hero__placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #eee;
+}
+
+
+/* =========================================
+   MOBILE LAYOUT
+========================================= */
+
+@media screen and (max-width: 749px) {
+
+  .sheia-hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image first */
+
+  .sheia-hero__media {
+    order: 1;
+    width: 100%;
+  }
+
+  .sheia-hero__media img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Text panel underneath */
+
+  .sheia-hero__panel {
+    order: 2;
+    width: 100%;
+    min-height: 220px;
+    padding: 35px 22px;
+  }
+
+  .sheia-hero__content {
+    max-width: 558px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .sheia-hero__heading {
+    font-size: clamp(27px, 7vw, 38px);
+    margin-bottom: 15px;
+  }
+
+  .sheia-hero__description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .sheia-hero__button {
+    min-height: 44px;
+    padding: 11px 26px;
+    font-size: 12px;
+  }
+
+}
+@media screen and (min-width: 1440px) {
+  .sheia-hero__panel {
+    padding-left: calc((100vw - 1440px)/2);
+  }
+}
+.sheia-hero__panel {
+    background-image: url(../assets/heroback.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

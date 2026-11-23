@@ -4,7 +4,9 @@
   assign block_settings = block.settings
   assign image = settings.logo
 
-  if block_settings.inverse and settings.logo_inverse
+  if section.settings.footer_logo != blank
+    assign image = section.settings.footer_logo
+  elsif block_settings.inverse and settings.logo_inverse
     assign image = settings.logo_inverse
   endif
 %}
@@ -67,7 +69,7 @@
     {% render 'jumbo-text', text: shop.name %}
   {% endif %}
 </div>
-
+ 
 {% stylesheet %}
   .logo-block {
     width: calc(var(--logo-width) + var(--padding-inline-start) + var(--padding-inline-end));

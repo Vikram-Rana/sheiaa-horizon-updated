@@ -1,0 +1,210 @@
+
+{% comment %}
+  Sheiaa Hero Section
+  Desktop: Two equal columns (50% text + 50% image)
+  Mobile: Image first, content below
+{% endcomment %}
+
+{{ 'hero-sheia.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image
+  assign panel_image = section.settings.panel_background_image
+%}
+
+<section
+  id="SheiaaHero-{{ section.id }}"
+  class="sheia-hero"
+  style="
+    --panel-padding: {{ section.settings.panel_padding }}px;
+    --panel-background-color: {{ section.settings.panel_background }};
+    --heading-size: {{ section.settings.heading_size }}px;
+    --text-alignment: {{ section.settings.text_alignment }};
+  "
+>
+  <div class="sheia-hero__inner">
+
+    <!-- LEFT: TEXT AREA -->
+
+    <div
+      class="sheia-hero__panel"
+      {% if panel_image != blank %}
+        style="background-image: url('{{ panel_image | image_url }}');"
+      {% endif %}
+    >
+      <div class="sheia-hero__content">
+
+        {% if section.settings.heading != blank %}
+          <h1 class="sheia-hero__heading">
+            {{ section.settings.heading | escape }}
+          </h1>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="sheia-hero__description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <a
+            class="sheia-hero__button"
+            href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+          >
+            <span>{{ section.settings.button_label | escape }}</span>
+          </a>
+        {% endif %}
+
+      </div>
+    </div>
+
+
+    <!-- RIGHT: IMAGE AREA -->
+
+    <div class="sheia-hero__media">
+
+      {% if desktop_image != blank %}
+
+        <picture>
+
+          {% if mobile_image != blank %}
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ mobile_image | image_url }}"
+            >
+          {% endif %}
+
+          <img
+            src="{{ desktop_image | image_url }}"
+            alt="{{ desktop_image.alt | default: section.settings.heading | escape }}"
+            width="{{ desktop_image.width }}"
+            height="{{ desktop_image.height }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+
+        </picture>
+
+      {% else %}
+
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'sheia-hero__placeholder' }}
+
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Sheiaa Hero",
+  "tag": "section",
+  "class": "sheiaa-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile hero image"
+    },
+    {
+      "type": "header",
+      "content": "Text Panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "panel_background_image",
+      "label": "Panel background image / pattern"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Panel background colour",
+      "default": "#791026"
+    },
+    {
+      "type": "range",
+      "id": "panel_padding",
+      "label": "Panel inner spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 55
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Hero Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Elegance That Tells Your Story"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Desktop heading size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover timeless styles crafted to celebrate your beauty and individuality.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheiaa Hero"
+    }
+  ]
+}
+{% endschema %}
